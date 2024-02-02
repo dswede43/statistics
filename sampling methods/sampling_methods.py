@@ -109,39 +109,43 @@ for i in range(n_iter):
 #population mean estimates
 mean_results = pd.DataFrame({'SRS': srs_means, 'STRAT': strat_means, 'CLUST': clust_means}) #estimated population means
 
-#define the bin widths for the histograms
+#standard error distributions
+SE_results = pd.DataFrame({'SRS': srs_mean_sds, 'STRAT': strat_mean_sds, 'CLUST': clust_mean_sds}) #estimated standard errors of mean
+
+#define subplots
+fig, (ax1, ax2) = plt.subplots(nrows = 2, ncols = 1, figsize = (8, 8))
+fig.suptitle("Simple, stratified, and cluster sampling estimates\nfor the population mean")
+
+#create the first subplot
 mins = []
 maxs = []
-for i in mean_results.columns:
+for i in mean_results.columns: #define the bin widths for the histograms
     mins.append(min(mean_results[i]))
     maxs.append(max(mean_results[i]))
 
 bins = np.linspace(min(mins), max(maxs), num = 50)
+ax1.hist(mean_results['SRS'], bins = bins, alpha = 1, label = 'SRS')
+ax1.hist(mean_results['STRAT'], bins = bins, alpha = 0.5, label = 'STRAT')
+ax1.hist(mean_results['CLUST'], bins = bins, alpha = 0.5, label = 'CLUST')
+ax1.set_ylabel("Frequency")
+ax1.set_xlabel("Distribution of mean estimates")
+ax1.legend()
 
-plt.hist(mean_results['SRS'], bins = bins, alpha = 1, label = 'SRS')
-plt.hist(mean_results['STRAT'], bins = bins, alpha = 0.5, label = 'STRAT')
-plt.hist(mean_results['CLUST'], bins = bins, alpha = 0.5, label = 'CLUST')
-plt.title("Distributions of sample means")
-plt.legend()
-plt.savefig('estimated_mean_distributions.pdf', format = 'pdf') #save the plot as a pdf
-plt.show()
-
-#standard error distributions
-SE_results = pd.DataFrame({'SRS': srs_mean_sds, 'STRAT': strat_mean_sds, 'CLUST': clust_mean_sds}) #estimated standard errors of mean
-
-#define the bin widths for the histograms
+#create the second subplot
 mins = []
 maxs = []
-for i in SE_results.columns:
+for i in SE_results.columns: #define the bin widths for the histograms
     mins.append(min(SE_results[i]))
     maxs.append(max(SE_results[i]))
 
 bins = np.linspace(min(mins), max(maxs), num = 50)
+ax2.hist(SE_results['SRS'], bins = bins, alpha = 1, label = 'SRS')
+ax2.hist(SE_results['STRAT'], bins = bins, alpha = 0.5, label = 'STRAT')
+ax2.hist(SE_results['CLUST'], bins = bins, alpha = 0.5, label = 'CLUST')
+ax2.set_ylabel("Frequency")
+ax2.set_xlabel("Distribution of standard errors")
+ax2.legend()
 
-plt.hist(SE_results['SRS'], bins = bins, alpha = 1, label = 'SRS')
-plt.hist(SE_results['STRAT'], bins = bins, alpha = 0.5, label = 'STRAT')
-plt.hist(SE_results['CLUST'], bins = bins, alpha = 0.5, label = 'CLUST')
-plt.title("Distributions of sample means")
-plt.legend()
-plt.savefig('estimated_SE_distributions.pdf', format = 'pdf') #save the plot as a pdf
 plt.show()
+
+fig.savefig('sampling_methods.pdf', format = 'pdf') #save the plot as a pdf
