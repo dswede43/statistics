@@ -15,12 +15,12 @@ n_boot = 1000 #bootstrap sample size
 n_iter = 1000 #number of bootstrap iterations
 rng = np.random.default_rng(123) #set the seed
 
-
 #load the data
 #This data contains information about all flights that departed from NYC to destinations in the US, Puerto Rico
 #and American Virgin Islands in 2013. Data obtained from https://github.com/tidyverse/nycflights13?tab=readme-ov-file
 #The variable of interest is the flight departure delays in minutes.
-df = pd.read_csv("./nycflights.csv")
+dir = "/path/to/directory/"
+df = pd.read_csv(dir + "data/nycflights.csv")
 df = df['dep_delay']
 df = df.dropna()
 sample_df = df.sample(n_SRS, random_state = rng, replace = False) #take a simple random sample
@@ -61,4 +61,4 @@ ax2.axvline(x = upper_CI, linestyle = '--', color = 'red')
 plt.show()
 
 #save the plots as a pdf
-fig.savefig('boostrapping_random_variable.pdf', format = 'pdf')
+fig.savefig(dir + '/sampling methods/boostrapping_random_variable.pdf', format = 'pdf')

@@ -15,7 +15,8 @@ import matplotlib.pyplot as plt
 #This data contains information about all flights that departed from NYC () to destinations in the US, Puerto Rico
 #and American Virgin Islands in 2013. Data obtained from https://github.com/tidyverse/nycflights13?tab=readme-ov-file
 #The variable of interest is the flight departure delays in minutes.
-df = pd.read_csv("./nycflights.csv")
+dir = "/path/to/directory/"
+df = pd.read_csv(dir + "data/nycflights.csv")
 cols_to_keep = ['dep_delay']
 df = df[cols_to_keep]
 
@@ -23,7 +24,7 @@ df = df[cols_to_keep]
 dep_delay = df['dep_delay']
 plt.hist(dep_delay, bins = 50)
 plt.title("Distribution of flight departure delays (min)")
-plt.savefig('population_distribution.pdf', format = 'pdf') #save the plot as a pdf
+plt.savefig(dir + 'central limit theorem/population_distribution.pdf', format = 'pdf') #save the plot as a pdf
 plt.show()
 
 #simple random sampling
@@ -68,7 +69,6 @@ for i, col in enumerate(srs_means_df.columns):
     axes[i].set_xlabel('Departure delay (min)')
     axes[i].set_ylabel('counts')
 
-fig.savefig('SRS_distributions.pdf', format = 'pdf') #save the plot as a pdf
+fig.savefig(dir + 'central limit theorem/SRS_distributions.pdf', format = 'pdf') #save the plot as a pdf
 
-#The sampling distributions demonstrate the convergence to a standard normal distribution of sampling means
-#as the sample size increases.
+#The sampling distributions demonstrate the convergence to a standard normal distribution of sampling means as the sample size increases.

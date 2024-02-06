@@ -8,15 +8,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-#load the data
-#This data contains information about all flights that departed from NYC to destinations in the US, Puerto Rico
-#and American Virgin Islands in 2013. Data obtained from https://github.com/tidyverse/nycflights13?tab=readme-ov-file
-#The variable of interest is the flight departure delays in minutes.
-df = pd.read_csv("./nycflights.csv")
-cols_to_keep = ['origin','carrier','dep_delay']
-df = df[cols_to_keep]
-df = df.dropna()
-
 #define global variables
 num_var = 'dep_delay' #numeric variable
 strat_var = 'origin' #stratification variable
@@ -24,6 +15,16 @@ clust_var = 'carrier' #cluster variable
 n_iter = 1000 #number of sampling iterations
 n = 5000 #sample size
 n_clust = 3 #define the number of clusters to sample
+
+#load the data
+#This data contains information about all flights that departed from NYC to destinations in the US, Puerto Rico
+#and American Virgin Islands in 2013. Data obtained from https://github.com/tidyverse/nycflights13?tab=readme-ov-file
+#The variable of interest is the flight departure delays in minutes.
+dir = "/path/to/directory/"
+df = pd.read_csv(dir + "data/nycflights.csv")
+cols_to_keep = ['origin','carrier','dep_delay']
+df = df[cols_to_keep]
+df = df.dropna()
 
 
 #Simple random sample (SRS)
@@ -148,4 +149,4 @@ ax2.legend()
 
 plt.show()
 
-fig.savefig('sampling_methods.pdf', format = 'pdf') #save the plot as a pdf
+fig.savefig(dir + 'sampling methods/sampling_methods.pdf', format = 'pdf') #save the plot as a pdf
