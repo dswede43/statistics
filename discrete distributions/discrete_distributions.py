@@ -11,7 +11,7 @@ import math
 import matplotlib.pyplot as plt
 
 #define global variables
-dir = "/home/dan/Nextcloud/Documents/Computers/Code/Github repos/statistics/"
+dir = "/path/to/directory/"
 rng = np.random.default_rng(123) #set seed
 n = 10 #number of trials
 p = 0.4 #probability of success
