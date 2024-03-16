@@ -32,7 +32,7 @@ sigmahats = np.linspace(lower_sigma, upper_sigma, n)  # Potential estimates for 
 #create a grid of mu and sigma combinations
 mu_sigma_likelihoods = []
 
-for muhat in muhats:   
+for muhat in muhats:
     for sigmahat in sigmahats:
         #calculate the log-likelihood of the data given mu and sigma
         sigma_likelihood = -n * np.log(2 * np.pi) / 2 - n * np.log(sigmahat) - np.sum((x - muhat) ** 2) / (2 * sigmahat ** 2)
